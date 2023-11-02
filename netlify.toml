@@ -1,0 +1,35 @@
+# example netlify.toml
+[build]
+  command = "npm run build"
+ functions = "netlify/functions/"
+  publish = "build"
+
+  ## Uncomment to use this redirect for Single Page Applications like create-react-app.
+  ## Not needed for static site generators.
+
+    # Branch deploy context:
+    # All deploys that are not from a pull/merge request
+    # or from the production branch will inherit these settings.
+[context.branch-deploy]
+  command = "make staging"
+
+  ## (optional) Settings for Netlify Dev
+  ## https://github.com/netlify/cli/blob/main/docs/netlify-dev.md#project-detection
+  #[dev]
+  #  command = "yarn start" # Command to start your dev server
+  #  port = 3000 # Port that the dev server will be listening on
+  #  publish = "dist" # Folder with the static content for _redirect file
+
+  ## more info on configuring this file: https://www.netlify.com/docs/netlify-toml-reference/
+
+
+[functions."cronJobDiscord"]
+schedule = "@hourly"
+
+[[redirects]]
+  from = "/*"
+  to = "/assets"
+  status = 200
+  force = true
+  query = {path = ":path"}
+  conditions = { Role = ["user"]}
