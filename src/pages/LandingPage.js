@@ -4,16 +4,11 @@ import { Hero } from "../components/landingPage/hero";
 import { DynamicMetaTags } from "../utils/dynamicMetaTags";
 import { FaunaBd } from "../components/landingPage/faunaDb";
 import React from "react";
+import { PageLayout } from "../components/layout/pageLayout";
 
 export const LandingPage = () => {
   return (
-    <div
-      style={{
-        backgroundColor: "#f4f1ed",
-        justifyContent: "center",
-        display: "flex",
-      }}
-    >
+    <PageLayout>
       <DynamicMetaTags ogTitle={`boiler-plate-v3`} ogImage={""} />
       <Row style={{ maxWidth: "900px", height: "70vh" }}>
         <Hero />
@@ -23,6 +18,6 @@ export const LandingPage = () => {
           <FaunaBd />
         </Col>
       </Row>
-    </div>
+    </PageLayout>
   );
 };

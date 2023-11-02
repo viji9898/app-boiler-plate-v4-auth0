@@ -8,19 +8,21 @@ import { LandingPage } from "./pages/LandingPage";
 import ScrollToTop from "./utils/ScrollToTop";
 import { Footer } from "./components/navigation/footer";
 import { Assets } from "./pages/Assets";
+import { Callback } from "./utils/auth0/callback";
+import { AuthenticationGuard } from "./utils/auth0/authenticationGuard";
 
 function App() {
   return (
-    <Router>
-      <NavBar />
-      <ScrollToTop />
-      <Routes>
-        <Route exact path="/" element={<LandingPage />} />
-        <Route exact path="/assets" element={<Assets />} />
-        <Route exact path="/*" element={<NotFound />} />
-      </Routes>
-      <Footer />
-    </Router>
+    <Routes>
+      <Route exact path="/" element={<LandingPage />} />
+      {/* <Route exact path="/assets" element={<Assets />} /> */}
+      <Route
+        path="/assets"
+        element={<AuthenticationGuard component={Assets} />}
+      />
+      <Route exact path="/*" element={<NotFound />} />
+      <Route exact path="/callback" element={<Callback />} />
+    </Routes>
   );
 }
 

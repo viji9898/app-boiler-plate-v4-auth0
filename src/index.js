@@ -6,12 +6,19 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.min.css";
 
+import { BrowserRouter } from "react-router-dom";
+import { Auth0ProviderNavigate } from "./utils/auth0/auth0ProviderNavigate";
+
 const container = document.getElementById("root");
 const root = createRoot(container);
 
 root.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <Auth0ProviderNavigate>
+        <App />
+      </Auth0ProviderNavigate>
+    </BrowserRouter>
   </React.StrictMode>
 );
 

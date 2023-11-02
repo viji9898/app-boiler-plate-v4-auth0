@@ -1,4 +1,5 @@
 import { Card, Col, Image, Row, Typography } from "antd";
+import { PageLayout } from "../components/layout/pageLayout";
 
 export const Assets = () => {
   const { Paragraph } = Typography;
@@ -72,7 +73,7 @@ export const Assets = () => {
   });
 
   return (
-    <div className="main">
+    <PageLayout>
       <Row gutter={[18, 18]} style={{ maxWidth: "900px" }}>
         <Col span={24}>
           <h1>Collection of Creative Assets for Boiler Plate</h1>
@@ -87,6 +88,6 @@ export const Assets = () => {
         </Col>
         {listAssetData}
       </Row>
-    </div>
+    </PageLayout>
   );
 };

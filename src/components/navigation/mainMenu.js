@@ -2,6 +2,11 @@ import { Button, Drawer, Grid, Menu } from "antd";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { MenuOutlined } from "@ant-design/icons";
+import { useAuth0 } from "@auth0/auth0-react";
+import { LogoutButton } from "../../utils/auth0/logoutButton";
+import { LoginButton } from "../../utils/auth0/loginButton";
+import { SignupButton } from "../../utils/auth0/signupButton";
+
 export const MainMenu = () => {
   const { useBreakpoint } = Grid;
   const { md } = useBreakpoint();
@@ -16,24 +21,21 @@ export const MainMenu = () => {
   const onClose = () => {
     setOpen(false);
   };
+
+  const { isAuthenticated } = useAuth0();
+
   const items = [
     {
-      label: (
-        <Link to="/" style={{ textDecoration: "none" }} onClick={onClose}>
-          {"home"}
-        </Link>
-      ),
-      key: "link1",
+      label: !isAuthenticated && <SignupButton />,
+      key: "sign-up",
     },
     {
-      label: (
-        <Link to="/hello" style={{ textDecoration: "none" }} onClick={onClose}>
-          {"Ooops"}
-        </Link>
-      ),
-      key: "link2",
+      label: isAuthenticated ? <LogoutButton /> : <LoginButton />,
+      key: "login-status",
     },
   ];
+
+  console.log(isAuthenticated);
 
   return (
     <div style={{ textAlign: "center" }}>
