@@ -6,6 +6,10 @@
 
   ## Uncomment to use this redirect for Single Page Applications like create-react-app.
   ## Not needed for static site generators.
+    [[redirects]]
+    from = "/*"
+    to = "/index.html"
+    status = 200
 
     # Branch deploy context:
     # All deploys that are not from a pull/merge request
@@ -22,14 +26,3 @@
 
   ## more info on configuring this file: https://www.netlify.com/docs/netlify-toml-reference/
 
-
-[functions."cronJobDiscord"]
-schedule = "@hourly"
-
-[[redirects]]
-  from = "/*"
-  to = "/assets"
-  status = 200
-  force = true
-  query = {path = ":path"}
-  conditions = { Role = ["user"]}
