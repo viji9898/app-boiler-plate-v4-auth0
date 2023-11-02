@@ -1,6 +1,5 @@
 import { Button, Drawer, Grid, Menu } from "antd";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import { MenuOutlined } from "@ant-design/icons";
 import { useAuth0 } from "@auth0/auth0-react";
 import { LogoutButton } from "../../utils/auth0/logoutButton";
