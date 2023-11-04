@@ -5,6 +5,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { LogoutButton } from "../../utils/auth0/logoutButton";
 import { LoginButton } from "../../utils/auth0/loginButton";
 import { SignupButton } from "../../utils/auth0/signupButton";
+import { Link } from "react-router-dom";
 
 export const MainMenu = () => {
   const { useBreakpoint } = Grid;
@@ -32,9 +33,25 @@ export const MainMenu = () => {
       label: isAuthenticated ? <LogoutButton /> : <LoginButton />,
       key: "login-status",
     },
+    {
+      label: (
+        <Link to={"/profile"}>
+          <Button>{"Profile"}</Button>
+        </Link>
+      ),
+      key: "private",
+    },
   ];
 
   console.log(isAuthenticated);
+
+  const listMenu = items.map((data) => {
+    return (
+      <Menu.Item style={{ paddingInline: "0px" }} key={data.key}>
+        {data.label}
+      </Menu.Item>
+    );
+  });
 
   return (
     <div style={{ textAlign: "center" }}>
@@ -43,11 +60,18 @@ export const MainMenu = () => {
           <Menu
             onClick={onClick}
             disabledOverflow={true}
-            style={{ justifyContent: "right", borderBottom: "0px" }}
+            style={{
+              justifyContent: "right",
+              borderBottom: "0px",
+              padding: "0px",
+              paddingInline: "0px",
+            }}
             selectedKeys={[current]}
             mode="horizontal"
-            items={items}
-          />
+            // items={items}
+          >
+            {listMenu}
+          </Menu>
         </div>
       ) : (
         <div>
