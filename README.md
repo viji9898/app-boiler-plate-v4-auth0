@@ -57,10 +57,11 @@ The app is intended to provide a boiler plate for a single page app.
 
 From Settings 
 - add Domain + Client ID + Callback URL to .env file
-
+```
 REACT_APP_AUTH0_DOMAIN=
 REACT_APP_AUTH0_CLIENT_ID=
 REACT_APP_AUTH0_CALLBACK_URL=
+```
 
 Complete Application URIs - add localhost + production domain 
 - Allowed Callback URLs */callback 
@@ -74,9 +75,10 @@ Checkpoint: Deploy site - test login.
 - Actions - Library - Custom
 - Login
 
-create_auth0_profile_fauna
+- Dependencies include faunadb
+- add FAUNA_SECRET_KEY= 
 
-### Connect to new Fauna Database
+## create_auth0_profile_fauna
 
 ```
 const faunadb = require("faunadb");
@@ -93,6 +95,8 @@ exports.onExecutePostUserRegistration = async (event) => {
     .query(q.Create(q.Collection("Users"), { data: { userId: event.user.user_id, userEmail: event.user.email, profileCreated:false, created:q.Now(), location:event.request, auth0UserData: event.user,}} ))
 };
 ```
+
+### Connect to new Fauna Database
 
 - create new DB
 - Create Collections: Users + Profiles
