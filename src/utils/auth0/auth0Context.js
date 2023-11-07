@@ -6,7 +6,13 @@ export const Auth0Context = createContext({});
 
 export const Auth0ContextProvider = ({ children }) => {
   const { user, isAuthenticated } = useAuth0();
-  const [userProfile, setUserProfile] = useState(null);
+  const [userProfile, setUserProfile] = useState({
+    ref: "",
+    profileData: {},
+    userEmail: "",
+    userId: "",
+    profileComplete: "",
+  });
 
   useEffect(() => {
     const userId = user?.sub;
