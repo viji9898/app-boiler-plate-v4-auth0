@@ -5,6 +5,7 @@ import { DynamicMetaTags } from "../utils/dynamicMetaTags";
 import { FaunaBd } from "../components/landingPage/faunaDb";
 import React from "react";
 import { PageLayout } from "../components/layout/pageLayout";
+import { PurchaseButton } from "./PurchaseButton";
 
 export const LandingPage = () => {
   return (
@@ -15,6 +16,7 @@ export const LandingPage = () => {
         <Col style={{ textAlign: "center" }} span={24}>
           <h2>{"Test Envirnoment"}</h2>
           <p>Event: testing commits from mac mini 2014</p>
+          <PurchaseButton />
           <FaunaBd />
         </Col>
       </Row>

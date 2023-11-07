@@ -7,7 +7,10 @@ import { Assets } from "./pages/Assets";
 import { Callback } from "./utils/auth0/callback";
 import { AuthenticationGuard } from "./utils/auth0/authenticationGuard";
 import { ProfilePage } from "./pages/Profile";
+
 import { Auth0ContextProvider } from "./utils/auth0/auth0Context";
+import PaymentElement from "./utils/stripe/paymentElement";
+import Completion from "./utils/stripe/completion";
 
 function App() {
   return (
@@ -22,6 +25,14 @@ function App() {
         <Route
           path="/profile"
           element={<AuthenticationGuard component={ProfilePage} />}
+        />
+        <Route
+          path="/checkout"
+          element={<AuthenticationGuard component={PaymentElement} />}
+        />
+        <Route
+          path="/completion"
+          element={<AuthenticationGuard component={Completion} />}
         />
         <Route exact path="/*" element={<NotFound />} />
         <Route exact path="/callback" element={<Callback />} />

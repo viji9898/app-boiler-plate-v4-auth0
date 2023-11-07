@@ -2,6 +2,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import React, { useContext } from "react";
 import { PageLayout } from "../components/layout/pageLayout";
 import Auth0Context from "../utils/auth0/auth0Context";
+import { Divider } from "antd";
 
 export const ProfilePage = () => {
   const { user } = useAuth0();
@@ -14,11 +15,9 @@ export const ProfilePage = () => {
   return (
     <PageLayout>
       <div className="content-layout">
-        <h1 id="page-title" className="content__title">
-          Profile Page
-        </h1>
         <br></br>
-        <h2>Auth0 Date Profile</h2>
+        <Divider />
+        <h2>Profile Data from Auth0</h2>
         <div className="content__body">
           <p id="page-description">
             <span>
@@ -43,8 +42,9 @@ export const ProfilePage = () => {
               </div>
             </div>
             <br></br>
+            <Divider />
             <h2 id="page-title" className="content__title">
-              Profile Page from Fauna
+              Profile Data from Fauna
             </h2>
             <p>Fauna Ref: {userProfile.ref}</p>
             <p>Auth0Id: {userProfile.userId}</p>

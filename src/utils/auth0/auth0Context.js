@@ -6,14 +6,7 @@ export const Auth0Context = createContext({});
 
 export const Auth0ContextProvider = ({ children }) => {
   const { user, isAuthenticated } = useAuth0();
-  const [userProfile, setUserProfile] = useState({
-    profileData: {
-      experience: [],
-      technologies: [],
-      roleType: [],
-      cvFileUpload: { file: "" },
-    },
-  });
+  const [userProfile, setUserProfile] = useState(null);
 
   useEffect(() => {
     const userId = user?.sub;
