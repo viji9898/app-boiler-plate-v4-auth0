@@ -22,7 +22,7 @@ The app is intended to provide a boiler plate for a single page app.
 - create a new repo
 - follow instructions to connect github repo to local repo
 
-### lready connected to a repo?
+### Already connected to a repo?
 
 - `rm -rf .git`
 - `git init`
@@ -49,6 +49,60 @@ The app is intended to provide a boiler plate for a single page app.
 - `Deploy`
 - Add environment variables from .env file
 - re `Deploy`
+
+### Connect to Auth0
+
+- create a new tenant
+- create a new application - Single Page Web App
+
+From Settings 
+- add Domain + Client ID + Callback URL to .env file
+
+REACT_APP_AUTH0_DOMAIN=
+REACT_APP_AUTH0_CLIENT_ID=
+REACT_APP_AUTH0_CALLBACK_URL=
+
+Complete Application URIs - add localhost + production domain 
+- Allowed Callback URLs */callback 
+- Allowed Logout URLs
+- Allowed Web Orgin
+
+Checkpoint: Deploy site - test login. 
+
+### Create Actions in Auth0
+
+- Actions - Library - Custom
+- Login
+
+create_auth0_profile_fauna
+
+### Connect to new Fauna Database
+
+```
+const faunadb = require("faunadb");
+const q = faunadb.query;
+
+exports.onExecutePostUserRegistration = async (event) => {
+    const client = new faunadb.Client({
+    secret: event.secrets.FAUNA_SECRET_KEY
+  });
+
+
+
+  return client
+    .query(q.Create(q.Collection("Users"), { data: { userId: event.user.user_id, userEmail: event.user.email, profileCreated:false, created:q.Now(), location:event.request, auth0UserData: event.user,}} ))
+};
+```
+
+- create new DB
+- Create Collections: Users + Profiles
+- Create Indexes:
+profile_by_auth0_user_id - serach by userId
+user_by_auth0_user_id - search by userId
+
+
+  
+
 
 👍🏾 - well done!
 
