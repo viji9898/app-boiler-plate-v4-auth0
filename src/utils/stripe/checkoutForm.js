@@ -10,7 +10,7 @@ export default function CheckoutForm({ clientSecret }) {
   const elements = useElements();
 
   const [message, setMessage] = useState(null);
-  const [product, setProduct] = useState(null);
+
   const [isProcessing, setIsProcessing] = useState(false);
 
   // useEffect(() => {
