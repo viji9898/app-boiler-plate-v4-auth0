@@ -178,7 +178,15 @@ exports.onExecutePostUserRegistration = async (event) => {
   )
 };
 ```
+#### Flow Login 
+- create_login_google_profile_fauna
+- create_login_google_user_profile_fauna
 
+#### Flow Post User Registration
+- create_auth0_profile_fauna
+- create_user_profile_fauna
+
+Importabt - in the same order as presented above
 
 
 ### Connect to new Fauna Database
