@@ -10,12 +10,11 @@ import { PurchaseButton } from "./PurchaseButton";
 export const LandingPage = () => {
   return (
     <PageLayout>
-      <DynamicMetaTags ogTitle={`boiler-plate-v3`} ogImage={""} />
+      <DynamicMetaTags ogTitle={`app-boiler-plate-v4-auth0`} ogImage={""} />
       <Row style={{ maxWidth: "900px", height: "70vh" }}>
         <Hero />
         <Col style={{ textAlign: "center" }} span={24}>
           <h2>{"Test Envirnoment"}</h2>
-          <p>Event: testing commits from mac mini 2014</p>
           <PurchaseButton />
           <FaunaBd />
         </Col>

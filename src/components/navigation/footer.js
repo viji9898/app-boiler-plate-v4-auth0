@@ -54,7 +54,7 @@ export const Footer = () => {
         <Divider></Divider>
         <Col xs={24} sm={24} md={8} style={{ fontFamily: "Montserrat" }}>
           <p style={{ fontWeight: "900" }}>starter-app</p>
-          <p style={{ fontSize: "14px" }}>boiler-plate-app-v3</p>
+          <p style={{ fontSize: "14px" }}>app-boiler-plate-v4-auth0</p>
           <Space>
             <a
               style={{
