@@ -96,6 +96,91 @@ exports.onExecutePostUserRegistration = async (event) => {
 };
 ```
 
+#### create_login_google_profile_fauna
+
+```
+const faunadb = require("faunadb");
+const q = faunadb.query;
+
+exports.onExecutePostLogin = async (event) => {
+    const client = new faunadb.Client({
+    secret: event.secrets.FAUNA_SECRET_KEY
+  });
+
+  if ( event.stats.logins_count === 1 && event.connection.name === "google-oauth2") {
+    return client
+    .query(q.Create(q.Collection("Users"), { data: { userId: event.user.user_id, userEmail: event.user.email, profileCreated:false, created:q.Now(), location:event.request, auth0UserData: event.user,}} ))
+ }
+};
+```
+#### create_login_google_user_profile_fauna
+
+```
+const faunadb = require("faunadb");
+const q = faunadb.query;
+
+exports.onExecutePostLogin = async (event) => {
+    const client = new faunadb.Client({
+    secret: event.secrets.FAUNA_SECRET_KEY
+  });
+
+  if ( event.stats.logins_count === 1 && event.connection.name === "google-oauth2") {
+  return client
+    .query(
+      q.Let(
+        {
+          userDoc: q.Get(q.Match(q.Index("user_by_auth0_user_id"), event.user.user_id)),
+          userRef: q.Select(["ref", "id"], q.Var("userDoc")),
+        },
+
+        q.Create(q.Collection("Profiles"), { data: { 
+          userRef: q.Var("userRef"),
+          userId: event.user.user_id, 
+          userEmail: event.user.email, 
+          profileComplete:false, 
+          created:q.Now()
+          }
+        } 
+      )
+    )
+  )
+  }
+};
+```
+
+#### create_user_profile_fauna
+```
+const faunadb = require("faunadb");
+const q = faunadb.query;
+
+exports.onExecutePostUserRegistration = async (event) => {
+    const client = new faunadb.Client({
+    secret: event.secrets.FAUNA_SECRET_KEY
+  });
+  return client
+    .query(
+      q.Let(
+        {
+          userDoc: q.Get(q.Match(q.Index("user_by_auth0_user_id"), event.user.user_id)),
+          userRef: q.Select(["ref", "id"], q.Var("userDoc")),
+        },
+
+        q.Create(q.Collection("Profiles"), { data: { 
+          userRef: q.Var("userRef"),
+          userId: event.user.user_id, 
+          userEmail: event.user.email, 
+          profileComplete:false, 
+          created:q.Now()
+          }
+        } 
+      )
+    )
+  )
+};
+```
+
+
+
 ### Connect to new Fauna Database
 
 - create new DB
